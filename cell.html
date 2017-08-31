@@ -2,30 +2,76 @@
 <html>
 <head>
 		<style>
-				#row div {
-						background-color: aquamarine;
-						height: 7px;
-						width: 7px;
-						margin: 2px;
-						display: inline-block;
-				}
+			.row div {
+					background-color: azure;
+					height: 7px;
+					width: 7px;
+					margin: 2px;
+					display: inline-block;
+			}
+			
+			.row div.active {
+				background-color: aquamarine;
+			}
 		</style>
 </head>
 <body>
-	<div id="row"></div>
+	<div class="organism">
+		<div class="row"></div>
+	</div>
 	<script>
-			
-		//set up divs
-		for (let i = 0; i < 101; i++) {
-				let div = document.createElement('div')
-				document.getElementById('row').appendChild(div)
-		}
 		
 		// generate random binary
 		const binary = [true, false]
 		function randomBinary() {
 				return Math.floor(Math.random() * binary.length)
 		}
+			
+		//set up divs
+		for (let i = 0; i < 101; i++) {
+				let div = document.createElement('div')
+				document.querySelector('.row').appendChild(div)
+		}
+		
+		//pass row in and randomise each cell
+		function randomiseRow(row) {
+				let rowCells = row.children
+				for (let i = 0; i < rowCells.length; i++) {
+					let cell = rowCells[i]
+					if(randomBinary()) {
+						cell.classList.add('active')
+					} 
+//					else {
+//						cell.classList.remove('active')
+//					}
+				}
+		}
+		
+		//this does too much stuff
+		function duplicateRow() {
+			let firstRow = document.querySelector('.row')
+			randomiseRow(firstRow) 
+			let rowClone = firstRow.cloneNode(true)
+			randomiseRow(rowClone)
+			document.querySelector('.organism').appendChild(rowClone)
+		}
+		
+		duplicateRow()
+		
+			
+//		//stupid shit
+//		let divsArray = document.getElementById('row').children
+//		console.log(divsArray.length)
+//		for (let i = 0; i < divsArray; i++) {
+//				setTimeout((i) => {
+//						if(randomBinary()) {
+//							divsArray[i].
+//						}
+//				}, 1000)
+//		}
+
+		
+			
 	</script>
 </body>
 </html>
