@@ -40,23 +40,48 @@
 					let cell = rowCells[i]
 					if(randomBinary()) {
 						cell.classList.add('active')
-					} 
-//					else {
-//						cell.classList.remove('active')
-//					}
+					} else {
+						cell.classList.remove('active')
+					}
 				}
 		}
 		
+		//grab first row
+		let firstRow = document.querySelector('.row')
+		randomiseRow(firstRow) 
+		
 		//this does too much stuff
 		function duplicateRow() {
-			let firstRow = document.querySelector('.row')
-			randomiseRow(firstRow) 
+			let allRows = document.querySelectorAll('.row')
+			let lastRow = allRows[allRows.length - 1]
 			let rowClone = firstRow.cloneNode(true)
 			randomiseRow(rowClone)
 			document.querySelector('.organism').appendChild(rowClone)
 		}
 		
 		duplicateRow()
+		duplicateRow()
+		
+		function processRow(rowDiv) {
+			let parentRowDiv = rowDiv.previousElementSibling
+			for (let i = 0; i < rowDiv.children.length; i++ ) {
+				let target = rowDiv.children[i]
+				let prevSelf = parentRowDiv.children[i]
+				let rightSibling = prevSelf.nextElementSibling // handle null
+				let leftSibling = prevSelf.previousElementSibling // handle null
+				
+//				console.log('target: ', target)
+//				console.log('prevself: ', prevSelf)
+//				console.log('rightSibling: ', rightSibling)
+//				console.log('leftSibling: ', leftSibling)
+			}
+		}
+		
+		let row = document.querySelectorAll('.row')[1]
+		console.log(row)
+		processRow(row)
+		
+
 		
 			
 //		//stupid shit
